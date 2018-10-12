@@ -5,13 +5,18 @@
  */
 package main.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 /**
  *
@@ -26,7 +31,7 @@ public class View {
     private final int cao_muc = 350;
     private final int rong_muc = 1200;
     
-    private Pane background,muc;
+    private Pane background,muc,background_2;
     private Button button;
     private Scene scene;
     private Label tieude;
@@ -61,5 +66,12 @@ public class View {
     
     public Scene getScene() {
         return scene;
+    }
+    
+    public void chonbatdau(EventHandler<ActionEvent> eventHandler){
+        button.setOnAction(eventHandler);
+    }
+    public void background2(){
+        background.getChildren().removeAll();
     }
 }
