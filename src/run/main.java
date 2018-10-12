@@ -8,6 +8,7 @@ package run;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import main.view.View;
+import control.controller;
 
 /**
  *
@@ -15,6 +16,7 @@ import main.view.View;
  */
 public class main extends Application{
     private View view;
+    private controller control;
     
     public static void main(String[] args) {
         launch(args);
@@ -24,6 +26,7 @@ public class main extends Application{
     public void start(Stage primaryStage){
         
         view = new View();
+        control = new controller(view);
         primaryStage.setTitle("The first product");
         primaryStage.setScene(view.getScene());
         primaryStage.setResizable(false);
