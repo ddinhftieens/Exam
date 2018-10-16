@@ -7,7 +7,7 @@ package run;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import main.view.View;
+import main.view.*;
 import control.controller;
 
 /**
@@ -17,6 +17,7 @@ import control.controller;
 public class main extends Application{
     private View view;
     private controller control;
+    private lop Lop;
     
     public static void main(String[] args) {
         launch(args);
