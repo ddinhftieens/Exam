@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import main.view.*;
 import control.controller;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -17,7 +18,6 @@ import control.controller;
 public class main extends Application{
     private View view;
     private controller control;
-    private lop Lop;
     
     public static void main(String[] args) {
         launch(args);
@@ -29,6 +29,7 @@ public class main extends Application{
         view = new View();
         control = new controller(view);
         primaryStage.setTitle("The first product");
+        primaryStage.getIcons().add(new Image("icon/icon_Name.png"));
         primaryStage.setScene(view.getScene());
         primaryStage.setResizable(false);
         primaryStage.show();

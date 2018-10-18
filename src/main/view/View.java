@@ -20,6 +20,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import java.util.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Toggle;
 import toJDBC.*;
 
 /**
@@ -41,15 +44,17 @@ public class View {
     private Scene scene;
     private Label tieude,cauhoi;
     private lop Lop;
-    private trangchinh Trangchinh;
     private GridPane gridPane;
     private RadioButton A,B,C,D;
     private ToggleGroup toggleGroup;
     protected contro Contro;
     private Date date;
     private gancauhoi ganCauHoi;
+    private int h1,h2,m1,m2,s1,s2;
+    private int[] x;
     
     public View(){
+        x = new int[55];
         Lop = new lop();
         background = new Pane();
         background.setMinSize(chieurong, chieucao);
@@ -74,8 +79,12 @@ public class View {
         button.setFont(new Font(45));
         muc.getChildren().add(button);
         background.getChildren().add(muc);
-        toggleGroup = new ToggleGroup();
+        
         Contro = new contro();
+    }
+
+    public contro getContro() {
+        return Contro;
     }
     
     public Scene getScene() {
@@ -92,16 +101,12 @@ public class View {
     public void eventToan(EventHandler<ActionEvent> eventHandler){
         Lop.getToan().setOnAction(eventHandler);
     }
-    public void setToan(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getToan().getText()));
-    }
     public void eventLi(EventHandler<ActionEvent> eventHandler){
         Lop.getLi().setOnAction(eventHandler);
     }
-    public void setLi(){
+    public void set(String name){
         background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLi().getText())); 
+        background.getChildren().add(new trangchinh(name));
         Contro.setLayoutX(10);
         Contro.setLayoutY(120);
         Contro.setMinSize(230, 480);
@@ -111,7 +116,8 @@ public class View {
         Contro.getCau1().setOnAction(eventHandler);
     }
     
-    public void setCau(question list){
+    public void setCau(question list,int t,int k){
+        toggleGroup = new ToggleGroup();
         gridPane = new GridPane();
         gridPane.setVgap(10);
         gridPane.setHgap(10);
@@ -139,34 +145,84 @@ public class View {
         B.setToggleGroup(toggleGroup);
         C.setToggleGroup(toggleGroup);
         D.setToggleGroup(toggleGroup);
-//        System.out.println(list.getAnswer());
-
-        if(list.getAnswer().equals("A")) System.out.println(list.getAnswer());
-        else if(list.getAnswer().equals("B")) System.out.println(list.getAnswer());
-        else if(list.getAnswer().equals("C")) System.out.println(list.getAnswer());
-        else if(list.getAnswer().equals("D")) System.out.println(list.getAnswer());
-
-//        if(list.getAnswer().equals("A")) toggleGroup.selectToggle(A);
-//        else if(list.getAnswer().equals("B")) toggleGroup.selectToggle(B);
-//        else if(list.getAnswer().equals("C")) toggleGroup.selectToggle(C);
-//        else if(list.getAnswer().equals("D")) toggleGroup.selectToggle(D);
-
+        A.setUserData(1);
+        B.setUserData(2);
+        C.setUserData(3);
+        D.setUserData(4);
+        switch (t) {
+            case 1:
+                A.setSelected(true);
+                break;
+            case 2:
+                B.setSelected(true);
+                break;
+            case 3:
+                C.setSelected(true);
+                break;
+            case 4:
+                D.setSelected(true);
+                break;
+            default:
+                break;
+        }
+        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            @Override
+            public void changed(ObservableValue<? extends Toggle> ob,Toggle o, Toggle n){
+                RadioButton rb = (RadioButton)toggleGroup.getSelectedToggle();
+                if (rb != null) { 
+                    x[k] = (int) rb.getUserData();
+                }
+            }
+        });
         gridPane.add(cauhoi,0,1,2,1);
         gridPane.add(A, 0, 2,2,1);
         gridPane.add(B, 0, 3,2,1);
         gridPane.add(C, 0, 4,2,1);
         gridPane.add(D, 0, 5,2,1);
         background.getChildren().add(gridPane);
-//        if(toggleGroup.getSelectedToggle().isSelected()) System.out.println("YES");
     }
+    public int[] getX() {
+        return x;
+    }
+
+    public Pane getBackground() {
+        return background;
+    }
+    
     public void start(EventHandler<ActionEvent> eventHandler){
         Contro.getBatdau().setOnAction(eventHandler);
     }
+    public void theEnd(EventHandler<ActionEvent> eventHandler){
+        Contro.getNopbai().setOnAction(eventHandler);
+    }
+    public ToggleGroup getToggleGroup() {
+        return toggleGroup;
+    }
+    
     public void setStart(){
         date = new Date();
+        h1 = date.getHours();
+        m1 = date.getMinutes();
+        s1 = date.getSeconds();
         Contro.add(new Label("Start: " + date.getHours() +":"+ date.getMinutes() +":"+ date.getSeconds()),0 ,11 ,4 ,1 );
         Contro.getChildren().remove(Contro.getBatdau());
+        Contro.add(Contro.getNopbai(), 0, 10, 2, 1);
         
+    }
+    public void setTheEnd(){
+        date = new Date();
+        s2 = date.getSeconds();
+        m2 = date.getMinutes();
+        h2 = date.getHours();
+        Contro.add(new Label("End: " + date.getHours() +":"+ date.getMinutes() +":"+ date.getSeconds()),0 ,12 ,4 ,1 );
+        Contro.getChildren().remove(Contro.getNopbai());
+        int giay2 = h2*3600+m2*60+s2;
+        int giay1 = h1*3600+m1*60+s1;
+        int giay = giay2 - giay1;
+        int h = giay/3600;
+        int m = (giay-h*3600)/60;
+        int s = giay - m*60 - h*3600;
+        Contro.add(new Label("Thời gian làm bài: " + h +":"+ m +":"+ s ), 0, 10,4,1);  
     }
     public void cau2(EventHandler<ActionEvent> eventHandler){
         Contro.getCau2().setOnAction(eventHandler);
@@ -180,93 +236,40 @@ public class View {
     public void eventHoa(EventHandler<ActionEvent> eventHandler){
         Lop.getHoa().setOnAction(eventHandler);
     }
-    public void setHoa(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getHoa().getText()));
-    }
     public void eventLop1(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop1().setOnAction(eventHandler);
-    }
-    public void setLop1(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop1().getText()));
     }
     public void eventLop2(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop2().setOnAction(eventHandler);
     }
-    public void setLop2(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop2().getText()));
-    }
     public void eventLop3(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop3().setOnAction(eventHandler);
-    }
-    public void setLop3(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop3().getText()));
     }
     public void eventLop4(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop4().setOnAction(eventHandler);
     }
-    public void setLop4(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop4().getText()));
-    }
     public void eventLop5(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop5().setOnAction(eventHandler);
-    }
-    public void setLop5(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop5().getText()));
     }
     public void eventLop6(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop6().setOnAction(eventHandler);
     }
-    public void setLop6(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop6().getText()));
-    }
     public void eventLop7(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop7().setOnAction(eventHandler);
-    }
-    public void setLop7(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop7().getText()));
     }
     public void eventLop8(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop8().setOnAction(eventHandler);
     }
-    public void setLop8(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop8().getText()));
-    }
     public void eventLop9(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop9().setOnAction(eventHandler);
-    }
-    public void setLop9(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop9().getText()));
     }
     public void eventLop10(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop10().setOnAction(eventHandler);
     }
-    public void setLop10(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop10().getText()));
-    }
     public void eventLop11(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop11().setOnAction(eventHandler);
-    }
-    public void setLop11(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop11().getText()));
     }
     public void eventLop12(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop12().setOnAction(eventHandler);
     }
-    public void setLop12(){
-        background.getChildren().removeAll(Lop);
-        background.getChildren().add(new trangchinh(Lop.getLop12().getText()));
-    }
-    
 }

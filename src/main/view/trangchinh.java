@@ -27,14 +27,24 @@ public class trangchinh extends GridPane{
     public trangchinh(String nameClass){
         super();
         label = new Label();
+        button = new Button();
+        button.setText("Trở về trang chủ");
+        button.setFont(new Font(20));
         setVgap(10);
         setHgap(10);
         setPadding(new Insets(10));
         label.setText(nameClass);
         label.setFont(new Font(68));
-        label.setMinSize(1190, 100);
+        label.setMinSize(950, 100);
         label.setAlignment(Pos.CENTER);
-        label.setStyle("-fx-background-color: #73ef75");      
-        add(label,0,0);
+        label.setStyle("-fx-background-color: #73ef75");
+        button.setStyle("-fx-pref-width: 230px; -fx-pref-height: 100px");
+        add(button,0,0);
+        add(label,1,0);
     }
+
+    public Button getButton() {
+        return button;
+    }
+    
 }

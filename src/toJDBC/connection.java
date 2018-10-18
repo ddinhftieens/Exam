@@ -19,14 +19,14 @@ public class connection {
     
     Connection connection = null;
     
-    public Connection getconnection(){
+    public Connection getconnection(String jdbc){
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-7946KH9:1433;databaseName=MonLi","sa","Tjeens");
+            connection = DriverManager.getConnection(jdbc,"sa","Tjeens");
         } catch (SQLException ex) {
             Logger.getLogger(connection.class.getName()).log(Level.SEVERE, null, ex);
         }

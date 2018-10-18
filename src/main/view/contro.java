@@ -7,7 +7,6 @@ package main.view;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 
@@ -141,7 +140,7 @@ public class contro extends GridPane{
         nopbai.setFont(new Font(15));
         batdau = new Button("Bắt đầu");
         batdau.setFont(new Font(15));
-        add(nopbai,0,10,2,1);
+//        add(nopbai,0,10,2,1);
         add(batdau,2,10,3,1);
         setStyle("-fx-background-color: #cccccc");
     }

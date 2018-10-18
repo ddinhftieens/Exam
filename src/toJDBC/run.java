@@ -21,14 +21,14 @@ import java.util.logging.Logger;
  */
 public class run {
     private List<question> list;
-    public run(){
+    public run(String jdbc, String bang){
 //        List<question> list = new ArrayList<>();
         list = new ArrayList();
         connection conn = new connection();
-        Connection connection = conn.getconnection();
+        Connection connection = conn.getconnection(jdbc);
         try {
             Statement stm = connection.createStatement();
-            ResultSet  rul = stm.executeQuery("select * from cauhoi");
+            ResultSet  rul = stm.executeQuery(bang);
             while(rul.next()){
                 list.add(new question(rul.getInt(1),rul.getString(2),rul.getString(3),rul.getString(4),rul.getString(5),rul.getString(6),rul.getString(7)));
             }
