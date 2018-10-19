@@ -21,6 +21,7 @@ public class contro extends GridPane{
     private Button cau31,cau32,cau33,cau34,cau35,cau36,cau37,cau38,cau39,cau40;
     private Button cau41,cau42,cau43,cau44,cau45,cau46,cau47,cau48,cau49,cau50;
     private Button nopbai,batdau;
+    private String k = "cau";
     
     public contro(){
         setVgap(10);
@@ -140,7 +141,6 @@ public class contro extends GridPane{
         nopbai.setFont(new Font(15));
         batdau = new Button("Bắt đầu");
         batdau.setFont(new Font(15));
-//        add(nopbai,0,10,2,1);
         add(batdau,2,10,3,1);
         setStyle("-fx-background-color: #cccccc");
     }
