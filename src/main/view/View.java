@@ -19,10 +19,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
-import java.util.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Toggle;
+import javafx.scene.paint.Color;
 import toJDBC.*;
 
 /**
@@ -42,7 +42,7 @@ public class View {
     protected Pane background;
     private Button button,check,next;
     private Scene scene;
-    private Label tieude,cauhoi;
+    private Label tieude,cauhoi,note;
     private lop Lop;
     private GridPane gridPane;
     private RadioButton A,B,C,D;
@@ -65,7 +65,7 @@ public class View {
         tieude.setLayoutY(0);
         tieude.setMinSize(rong_tieude + 10, cao_tieude);
         tieude.setStyle("-fx-background-color: #73ef75");
-        tieude.setText("Ôn tập lí thuyết");
+        tieude.setText("Ôn tập");
         tieude.setAlignment(Pos.CENTER);
         tieude.setFont(new Font(68));
         background.getChildren().add(tieude);
@@ -80,9 +80,9 @@ public class View {
         muc.getChildren().add(button);
         background.getChildren().add(muc);
         
-        Contro = new contro();
+        Contro = new contro();      
     }
-
+    
     public contro getContro() {
         return Contro;
     }
@@ -94,9 +94,23 @@ public class View {
     public void chonbatdau(EventHandler<ActionEvent> eventHandler){
         button.setOnAction(eventHandler);
     }
+    public void return_background(){
+        background.getChildren().removeAll();
+        background.getChildren().add(Lop);
+    }
     public void background2(){
         background.getChildren().removeAll(tieude,muc);
         background.getChildren().add(Lop);
+        note = new Label();
+        note.setText("Desgin: Nguyen Dinh Tien\n"+"Version: 1.0\n"+"Update: 19/10/2018");
+        note.setTextFill(Color.BLACK);
+        note.setFont(new Font(60));
+        note.setAlignment(Pos.CENTER);
+        note.setStyle("-fx-background-color: #cccccc");
+        note.setLayoutX(10);
+        note.setLayoutY(120);
+        note.setMinSize(1190, 480);
+        background.getChildren().add(note);
     }
     public void eventToan(EventHandler<ActionEvent> eventHandler){
         Lop.getToan().setOnAction(eventHandler);
@@ -105,12 +119,23 @@ public class View {
         Lop.getLi().setOnAction(eventHandler);
     }
     public void set(String name){
-        background.getChildren().removeAll(Lop);
+        background.getChildren().removeAll(Lop,note);
         background.getChildren().add(new trangchinh(name));
         Contro.setLayoutX(10);
         Contro.setLayoutY(120);
         Contro.setMinSize(230, 480);
         background.getChildren().add(Contro);
+        note = new Label();
+        note.setText("Lưu ý: Chọn BẮT ĐẦU trước khi làm bài đề tính thời gian !");
+        note.setAlignment(Pos.CENTER);
+        note.setFont(new Font(60));
+        note.setWrapText(true);
+        note.setTextFill(Color.RED);
+        note.setLayoutX(250);
+        note.setLayoutY(120);
+        note.setPrefSize(950, 480);
+        note.setStyle("-fx-background-color: #cccccc");
+        background.getChildren().add(note);
     }
     public void cau1(EventHandler<ActionEvent> eventHandler){
         Contro.getCau1().setOnAction(eventHandler);
@@ -141,14 +166,14 @@ public class View {
         D = new RadioButton(list.getD());
         D.setFont(new Font(20));
         D.setWrapText(true);
-        A.setToggleGroup(toggleGroup);
-        B.setToggleGroup(toggleGroup);
-        C.setToggleGroup(toggleGroup);
-        D.setToggleGroup(toggleGroup);
         A.setUserData(1);
         B.setUserData(2);
         C.setUserData(3);
         D.setUserData(4);
+        A.setToggleGroup(toggleGroup);
+        B.setToggleGroup(toggleGroup);
+        C.setToggleGroup(toggleGroup);
+        D.setToggleGroup(toggleGroup);
         switch (t) {
             case 1:
                 A.setSelected(true);
@@ -206,6 +231,7 @@ public class View {
         s1 = date.getSeconds();
         Contro.add(new Label("Start: " + date.getHours() +":"+ date.getMinutes() +":"+ date.getSeconds()),0 ,11 ,4 ,1 );
         Contro.getChildren().remove(Contro.getBatdau());
+        background.getChildren().remove(note);
         Contro.add(Contro.getNopbai(), 0, 10, 2, 1);
         
     }
@@ -271,5 +297,143 @@ public class View {
     }
     public void eventLop12(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop12().setOnAction(eventHandler);
+    }
+    public void cau5(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau5().setOnAction(eventHandler);
+    }
+    public void cau6(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau6().setOnAction(eventHandler);
+    }
+    public void cau7(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau7().setOnAction(eventHandler);
+    }
+    public void cau8(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau8().setOnAction(eventHandler);
+    }
+    public void cau9(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau9().setOnAction(eventHandler);
+    }
+    public void cau10(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau10().setOnAction(eventHandler);
+    }
+    public void cau11(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau11().setOnAction(eventHandler);
+    }
+    public void cau12(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau12().setOnAction(eventHandler);
+    }
+    public void cau13(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau13().setOnAction(eventHandler);
+    }
+    public void cau14(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau14().setOnAction(eventHandler);
+    }
+    public void cau15(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau15().setOnAction(eventHandler);
+    }
+    public void cau16(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau16().setOnAction(eventHandler);
+    }
+    public void cau17(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau17().setOnAction(eventHandler);
+    }
+    public void cau18(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau18().setOnAction(eventHandler);
+    }
+    public void cau19(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau19().setOnAction(eventHandler);
+    }
+    public void cau20(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau20().setOnAction(eventHandler);
+    }
+    public void cau21(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau21().setOnAction(eventHandler);
+    }
+    public void cau22(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau22().setOnAction(eventHandler);
+    }
+    public void cau23(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau23().setOnAction(eventHandler);
+    }
+    public void cau24(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau24().setOnAction(eventHandler);
+    }
+    public void cau25(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau25().setOnAction(eventHandler);
+    }
+    public void cau26(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau26().setOnAction(eventHandler);
+    }
+    public void cau27(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau27().setOnAction(eventHandler);
+    }
+    public void cau28(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau28().setOnAction(eventHandler);
+    }
+    public void cau29(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau29().setOnAction(eventHandler);
+    }
+    public void cau30(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau30().setOnAction(eventHandler);
+    }
+    public void cau31(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau31().setOnAction(eventHandler);
+    }
+    public void cau32(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau32().setOnAction(eventHandler);
+    }
+    public void cau33(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau33().setOnAction(eventHandler);
+    }
+    public void cau34(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau34().setOnAction(eventHandler);
+    }
+    public void cau35(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau35().setOnAction(eventHandler);
+    }
+    public void cau36(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau36().setOnAction(eventHandler);
+    }
+    public void cau37(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau37().setOnAction(eventHandler);
+    }
+    public void cau38(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau38().setOnAction(eventHandler);
+    }
+    public void cau39(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau39().setOnAction(eventHandler);
+    }
+    public void cau40(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau40().setOnAction(eventHandler);
+    }
+    public void cau41(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau41().setOnAction(eventHandler);
+    }
+    public void cau42(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau42().setOnAction(eventHandler);
+    }
+    public void cau43(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau43().setOnAction(eventHandler);
+    }
+    public void cau44(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau44().setOnAction(eventHandler);
+    }
+    public void cau45(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau45().setOnAction(eventHandler);
+    }
+    public void cau46(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau46().setOnAction(eventHandler);
+    }
+    public void cau47(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau47().setOnAction(eventHandler);
+    }
+    public void cau48(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau48().setOnAction(eventHandler);
+    }
+    public void cau49(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau49().setOnAction(eventHandler);
+    }
+    public void cau50(EventHandler<ActionEvent> eventHandler){
+        Contro.getCau50().setOnAction(eventHandler);
     }
 }
