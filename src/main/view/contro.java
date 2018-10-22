@@ -5,6 +5,8 @@
  */
 package main.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -21,7 +23,6 @@ public class contro extends GridPane{
     private Button cau31,cau32,cau33,cau34,cau35,cau36,cau37,cau38,cau39,cau40;
     private Button cau41,cau42,cau43,cau44,cau45,cau46,cau47,cau48,cau49,cau50;
     private Button nopbai,batdau;
-    private String k = "cau";
     
     public contro(){
         setVgap(10);
@@ -81,67 +82,13 @@ public class contro extends GridPane{
         cau48 = new Button("48");
         cau49 = new Button("49");
         cau50 = new Button("50");
-        
-        add(cau1,0,0);
-        add(cau2,1,0);
-        add(cau3,2,0);
-        add(cau4,3,0);
-        add(cau5,4,0);
-        add(cau6,0,1);
-        add(cau7,1,1);
-        add(cau8,2,1);
-        add(cau9,3,1);
-        add(cau10,4,1);
-        
-        add(cau11,0,2);
-        add(cau12,1,2);
-        add(cau13,2,2);
-        add(cau14,3,2);
-        add(cau15,4,2);
-        add(cau16,0,3);
-        add(cau17,1,3);
-        add(cau18,2,3);
-        add(cau19,3,3);
-        add(cau20,4,3);
-        
-        add(cau21,0,4);
-        add(cau22,1,4);
-        add(cau23,2,4);
-        add(cau24,3,4);
-        add(cau25,4,4);
-        add(cau26,0,5);
-        add(cau27,1,5);
-        add(cau28,2,5);
-        add(cau29,3,5);
-        add(cau30,4,5);
-        
-        add(cau31,0,6);
-        add(cau32,1,6);
-        add(cau33,2,6);
-        add(cau34,3,6);
-        add(cau35,4,6);
-        add(cau36,0,7);
-        add(cau37,1,7);
-        add(cau38,2,7);
-        add(cau39,3,7);
-        add(cau40,4,7);
-        
-        add(cau41,0,8);
-        add(cau42,1,8);
-        add(cau43,2,8);
-        add(cau44,3,8);
-        add(cau45,4,8);
-        add(cau46,0,9);
-        add(cau47,1,9);
-        add(cau48,2,9);
-        add(cau49,3,9);
-        add(cau50,4,9);
-        
+               
         nopbai = new Button("Nộp Bài");
         nopbai.setFont(new Font(15));
         batdau = new Button("Bắt đầu");
-        batdau.setFont(new Font(15));
-        add(batdau,2,10,3,1);
+        batdau.setFont(new Font(30));
+        batdau.setStyle("-fx-pref-width: 200px; -fx-pref-height: 100px");
+        add(batdau,0,0);
         setStyle("-fx-background-color: #cccccc");
     }
 

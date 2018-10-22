@@ -14,7 +14,6 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import main.view.*;
 import toJDBC.question;
 
@@ -22,10 +21,7 @@ public class controller {
     private View view;
     private gancauhoi ganCauHoi;
     private List<question> list;
-    private int last;
     private tinhDiem TinhDiem;
-    private Label gridPane;
-    private trangchinh TrangChinh;
     
     public controller(View vieww){
         this.view = vieww;
@@ -339,7 +335,7 @@ public class controller {
         view.cau23(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event){  
-                view.setCau(list.get(22), view.getX()[22],2);
+                view.setCau(list.get(22), view.getX()[22],22);
             }
         });
         view.cau24(new EventHandler<ActionEvent>(){
@@ -524,6 +520,5 @@ public class controller {
                 view.getBackground().getChildren().add(TinhDiem);
             }
         });
-        
     }
 }

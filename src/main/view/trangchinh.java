@@ -5,6 +5,8 @@
  */
 package main.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -21,8 +23,6 @@ public class trangchinh extends GridPane{
     
     private Label label;
     private Button button;
-    private StackPane quetions;
-    
     
     public trangchinh(String nameClass){
         super();
@@ -46,5 +46,7 @@ public class trangchinh extends GridPane{
     public Button getButton() {
         return button;
     }
-    
+    public void return_background(EventHandler<ActionEvent> eventHandler){
+        button.setOnAction(eventHandler);
+    }
 }

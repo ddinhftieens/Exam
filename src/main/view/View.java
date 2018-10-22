@@ -40,7 +40,7 @@ public class View {
     
     private Pane muc;
     protected Pane background;
-    private Button button,check,next;
+    private Button button;
     private Scene scene;
     private Label tieude,cauhoi,note;
     private lop Lop;
@@ -49,9 +49,9 @@ public class View {
     private ToggleGroup toggleGroup;
     protected contro Contro;
     private Date date;
-    private gancauhoi ganCauHoi;
     private int h1,h2,m1,m2,s1,s2;
     private int[] x;
+    private trangchinh TrangChinh;
     
     public View(){
         x = new int[55];
@@ -80,7 +80,7 @@ public class View {
         muc.getChildren().add(button);
         background.getChildren().add(muc);
         
-        Contro = new contro();      
+        Contro = new contro();
     }
     
     public contro getContro() {
@@ -95,14 +95,14 @@ public class View {
         button.setOnAction(eventHandler);
     }
     public void return_background(){
-        background.getChildren().removeAll();
+        background.getChildren().removeAll(Contro);
         background.getChildren().add(Lop);
     }
     public void background2(){
         background.getChildren().removeAll(tieude,muc);
         background.getChildren().add(Lop);
         note = new Label();
-        note.setText("Desgin: Nguyen Dinh Tien\n"+"Version: 1.0\n"+"Update: 19/10/2018");
+        note.setText("Nguyen Dinh Tien\n" + "19/10/2018");
         note.setTextFill(Color.BLACK);
         note.setFont(new Font(60));
         note.setAlignment(Pos.CENTER);
@@ -119,14 +119,15 @@ public class View {
         Lop.getLi().setOnAction(eventHandler);
     }
     public void set(String name){
-        background.getChildren().removeAll(Lop,note);
-        background.getChildren().add(new trangchinh(name));
+        TrangChinh = new trangchinh(name);
+        background.getChildren().removeAll(Lop,note);    
+        background.getChildren().add(TrangChinh);
         Contro.setLayoutX(10);
         Contro.setLayoutY(120);
         Contro.setMinSize(230, 480);
         background.getChildren().add(Contro);
         note = new Label();
-        note.setText("Lưu ý: Chọn BẮT ĐẦU trước khi làm bài đề tính thời gian !");
+        note.setText("Lưu ý: Chọn BẮT ĐẦU trước khi làm bài để tính thời gian !");
         note.setAlignment(Pos.CENTER);
         note.setFont(new Font(60));
         note.setWrapText(true);
@@ -229,10 +230,64 @@ public class View {
         h1 = date.getHours();
         m1 = date.getMinutes();
         s1 = date.getSeconds();
-        Contro.add(new Label("Start: " + date.getHours() +":"+ date.getMinutes() +":"+ date.getSeconds()),0 ,11 ,4 ,1 );
         Contro.getChildren().remove(Contro.getBatdau());
         background.getChildren().remove(note);
+        Contro.add(Contro.getCau1(),0,0);
+        Contro.add(Contro.getCau2(),1,0);
+        Contro.add(Contro.getCau3(),2,0);
+        Contro.add(Contro.getCau4(),3,0);
+        Contro.add(Contro.getCau5(),4,0);
+        Contro.add(Contro.getCau6(),0,1);
+        Contro.add(Contro.getCau7(),1,1);
+        Contro.add(Contro.getCau8(),2,1);
+        Contro.add(Contro.getCau9(),3,1);
+        Contro.add(Contro.getCau10(),4,1);
+        
+        Contro.add(Contro.getCau11(),0,2);
+        Contro.add(Contro.getCau12(),1,2);
+        Contro.add(Contro.getCau13(),2,2);
+        Contro.add(Contro.getCau14(),3,2);
+        Contro.add(Contro.getCau15(),4,2);
+        Contro.add(Contro.getCau16(),0,3);
+        Contro.add(Contro.getCau17(),1,3);
+        Contro.add(Contro.getCau18(),2,3);
+        Contro.add(Contro.getCau19(),3,3);
+        Contro.add(Contro.getCau20(),4,3);
+        
+        Contro.add(Contro.getCau21(),0,4);
+        Contro.add(Contro.getCau22(),1,4);
+        Contro.add(Contro.getCau23(),2,4);
+        Contro.add(Contro.getCau24(),3,4);
+        Contro.add(Contro.getCau25(),4,4);
+        Contro.add(Contro.getCau26(),0,5);
+        Contro.add(Contro.getCau27(),1,5);
+        Contro.add(Contro.getCau28(),2,5);
+        Contro.add(Contro.getCau29(),3,5);
+        Contro.add(Contro.getCau30(),4,5);
+        
+        Contro.add(Contro.getCau31(),0,6);
+        Contro.add(Contro.getCau32(),1,6);
+        Contro.add(Contro.getCau33(),2,6);
+        Contro.add(Contro.getCau34(),3,6);
+        Contro.add(Contro.getCau35(),4,6);
+        Contro.add(Contro.getCau36(),0,7);
+        Contro.add(Contro.getCau37(),1,7);
+        Contro.add(Contro.getCau38(),2,7);
+        Contro.add(Contro.getCau39(),3,7);
+        Contro.add(Contro.getCau40(),4,7);
+        
+        Contro.add(Contro.getCau41(),0,8);
+        Contro.add(Contro.getCau42(),1,8);
+        Contro.add(Contro.getCau43(),2,8);
+        Contro.add(Contro.getCau44(),3,8);
+        Contro.add(Contro.getCau45(),4,8);
+        Contro.add(Contro.getCau46(),0,9);
+        Contro.add(Contro.getCau47(),1,9);
+        Contro.add(Contro.getCau48(),2,9);
+        Contro.add(Contro.getCau49(),3,9);
+        Contro.add(Contro.getCau50(),4,9);
         Contro.add(Contro.getNopbai(), 0, 10, 2, 1);
+        Contro.add(new Label("Start: " + date.getHours() +":"+ date.getMinutes() +":"+ date.getSeconds()),0 ,11 ,4 ,1 );
         
     }
     public void setTheEnd(){

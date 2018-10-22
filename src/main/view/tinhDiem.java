@@ -26,7 +26,7 @@ public class tinhDiem extends GridPane{
     public tinhDiem(int[] x,List<question> list){
         right = 0;
         wrong = new ArrayList();
-        for(int i=0;i<4;i++){
+        for(int i=0;i<50;i++){
             switch (x[i]) {
                 case 1:
                     if((int) list.get(i).getAnswer().charAt(0) == 65){
@@ -52,6 +52,7 @@ public class tinhDiem extends GridPane{
                         
                     }else wrong.add(i);
                     break;
+                case 0: wrong.add(i);
                 default:
                     break;
             }
@@ -82,11 +83,11 @@ public class tinhDiem extends GridPane{
         label.setTextFill(Color.RED);
         add(label,10,1,1,4);
         int k = 0,t = 3;
-        if(wrong.size()>10) for(int i=0;i<wrong.size()/10;i++){
+        if(wrong.size()>=10) for(int i=0;i<wrong.size()/10;i++){
             for(int j =0;j<10;j++){
                 answerWrong = new Label(wrong.get(k)+1+list.get(wrong.get(k++)).getAnswer());
                 answerWrong.setTextFill(Color.RED);
-                answerWrong.setFont(new Font(30));
+                answerWrong.setFont(new Font(15));
                 add(answerWrong,j,t);
             }
             t++;
@@ -94,7 +95,7 @@ public class tinhDiem extends GridPane{
         for(int i = 0;i< wrong.size() - (wrong.size()/10)*10;i++){
             answerWrong = new Label(wrong.get(k)+1+list.get(wrong.get(k++)).getAnswer());
             answerWrong.setTextFill(Color.RED);
-            answerWrong.setFont(new Font(30));
+            answerWrong.setFont(new Font(15));
             add(answerWrong,i,t);
         }
     }
