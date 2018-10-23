@@ -199,6 +199,7 @@ public class View {
                 RadioButton rb = (RadioButton)toggleGroup.getSelectedToggle();
                 if (rb != null) { 
                     x[k] = (int) rb.getUserData();
+                    list.get(k).setStyle("-fx-background-color: #73ef75");
                 }
             }
         });
