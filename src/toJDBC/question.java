@@ -12,7 +12,6 @@ package toJDBC;
 public class question {
     private int ID;
     private String cauhoi,A,B,C,D,answer;
-
     public question(int ID, String cauhoi, String A, String B, String C, String D,String answer) {
         this.ID = ID;
         this.cauhoi = cauhoi;
