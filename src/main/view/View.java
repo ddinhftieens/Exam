@@ -154,7 +154,7 @@ public class View {
         gridPane.setLayoutY(120);
         gridPane.setPrefSize(950, 480);
         gridPane.setStyle("-fx-background-color: #cccccc");
-        cauhoi = new Label(Question.getCauhoi());
+        cauhoi = new Label("Câu "+ (k+1) +": "+Question.getCauhoi());
         cauhoi.setFont(new Font(30));
         cauhoi.setWrapText(true);
         A = new RadioButton(Question.getA());
