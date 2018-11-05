@@ -44,20 +44,28 @@ public class View {
     protected Pane background;
     private Button button;
     private Scene scene;
-    private Label tieude,cauhoi,note;
+    private Label tieude,cauhoi,note,note2;
     private lop Lop;
     private GridPane gridPane;
     private RadioButton A,B,C,D;
     private ToggleGroup toggleGroup;
-    protected contro Contro;
+    protected contro Contro,Refesh;
     private Date date;
     private int h1,h2,m1,m2,s1,s2;
     private int[] x;
     private trangchinh TrangChinh;
     private List<Button> list;
+    private Button return_background;
+    private boolean OK = true;
     
     public View(){
         x = new int[55];
+        return_background = new Button("Trở về trang chủ");
+        return_background.setFont(new Font(20));
+        return_background.setStyle("-fx-pref-width: 230px; -fx-pref-height: 100px");
+        return_background.setLayoutX(10);
+        return_background.setLayoutY(10);
+        
         Lop = new lop();
         background = new Pane();
         background.setMinSize(chieurong, chieucao);
@@ -86,8 +94,18 @@ public class View {
         Contro = new contro();
         list = new ArrayList();
         list = Contro.getList();
+        for(int i=0;i<50;i++){
+            list.get(i).setStyle("");
+        }
     }
     
+    public void eventLop1(EventHandler<ActionEvent> eventHandler) {
+        Lop.getLop1().setOnAction(eventHandler);
+        
+    }
+    public void eventLop2(EventHandler<ActionEvent> eventHandler) {
+        Lop.getLop2().setOnAction(eventHandler);
+    }
     public contro getContro() {
         return Contro;
     }
@@ -100,21 +118,30 @@ public class View {
         button.setOnAction(eventHandler);
     }
     public void return_background(){
-        background.getChildren().removeAll(Contro);
+        Contro.getChildren().clear();
+        Contro.getChildren().add(Contro.getBatdau());
+        x = new int[55];
+        for(int i=0;i<50;i++){
+            list.get(i).setStyle("");
+        }
         background.getChildren().add(Lop);
+    }
+    public void return_background(EventHandler<ActionEvent> eventHandler){
+        return_background.setOnAction(eventHandler);
     }
     public void background2(){
         background.getChildren().removeAll(tieude,muc);
         background.getChildren().add(Lop);
-        note = new Label();
-        note.setText("Nguyen Dinh Tien\n" + "19/10/2018");
-        note.setTextFill(Color.BLACK);
+        note = new Label();  
+        note.setText("- Đừng hối hận về những gì mà bạn đã làm, hãy hối hận về những gì mà bạn không giám làm !");
+        note.setTextFill(Color.LIME);
         note.setFont(new Font(60));
         note.setAlignment(Pos.CENTER);
+        note.setWrapText(true);
         note.setStyle("-fx-background-color: #cccccc");
         note.setLayoutX(10);
         note.setLayoutY(120);
-        note.setMinSize(1190, 480);
+        note.setPrefSize(1190, 480);
         background.getChildren().add(note);
     }
     public void eventToan(EventHandler<ActionEvent> eventHandler){
@@ -125,23 +152,27 @@ public class View {
     }
     public void set(String name){
         TrangChinh = new trangchinh(name);
-        background.getChildren().removeAll(Lop,note);    
+        background.getChildren().removeAll(Lop,note);
+        background.getChildren().add(return_background);
+        TrangChinh.setLayoutX(250);
+        TrangChinh.setLayoutY(10);
+        TrangChinh.setMinSize(950, 100);
         background.getChildren().add(TrangChinh);
         Contro.setLayoutX(10);
         Contro.setLayoutY(120);
         Contro.setMinSize(230, 480);
         background.getChildren().add(Contro);
-        note = new Label();
-        note.setText("- Trên con đường thành công không có dấu chân của người lười biếng!");
-        note.setAlignment(Pos.CENTER);
-        note.setFont(new Font(60));
-        note.setWrapText(true);
-        note.setTextFill(Color.RED);
-        note.setLayoutX(250);
-        note.setLayoutY(120);
-        note.setPrefSize(950, 480);
-        note.setStyle("-fx-background-color: #cccccc");
-        background.getChildren().add(note);
+        note2 = new Label();
+        note2.setText("GOOD LUCK !");
+        note2.setAlignment(Pos.CENTER);
+        note2.setFont(new Font(60));
+        note2.setWrapText(true);
+        note2.setTextFill(Color.CHARTREUSE);
+        note2.setLayoutX(250);
+        note2.setLayoutY(120);
+        note2.setPrefSize(950, 480);
+        note2.setStyle("-fx-background-color: #cccccc");
+        background.getChildren().add(note2);
     }
     
     public void setCau(question Question,int t,int k){
@@ -193,7 +224,20 @@ public class View {
             default:
                 break;
         }
-        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+        if(!OK){
+            if((char) Question.getAnswer().charAt(0) == 65){
+                A.setTextFill(Color.RED);
+            }
+            else if((char) Question.getAnswer().charAt(0) == 66){
+                B.setTextFill(Color.RED);
+            }
+            else if((char) Question.getAnswer().charAt(0) == 67){
+                C.setTextFill(Color.RED);
+            }
+            else D.setTextFill(Color.RED);
+        }
+        
+        if(OK) toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
             @Override
             public void changed(ObservableValue<? extends Toggle> ob,Toggle o, Toggle n){
                 RadioButton rb = (RadioButton)toggleGroup.getSelectedToggle();
@@ -216,6 +260,10 @@ public class View {
 
     public Pane getBackground() {
         return background;
+    }
+
+    public void setOK(boolean OK) {
+        this.OK = OK;
     }
     
     public void start(EventHandler<ActionEvent> eventHandler){
@@ -258,7 +306,8 @@ public class View {
         int h = giay/3600;
         int m = (giay-h*3600)/60;
         int s = giay - m*60 - h*3600;
-        Contro.add(new Label("Thời gian làm bài: " + h +":"+ m +":"+ s ), 0, 10,4,1);  
+        Contro.add(new Label("Thời gian làm bài: " + h +":"+ m +":"+ s ), 0, 10,4,1);
+        
     }
     public void cau_X(int i,EventHandler<ActionEvent> eventHandler){
             list.get(i).setOnAction(eventHandler);  
@@ -270,12 +319,7 @@ public class View {
     public void eventHoa(EventHandler<ActionEvent> eventHandler){
         Lop.getHoa().setOnAction(eventHandler);
     }
-    public void eventLop1(EventHandler<ActionEvent> eventHandler) {
-        Lop.getLop1().setOnAction(eventHandler);
-    }
-    public void eventLop2(EventHandler<ActionEvent> eventHandler) {
-        Lop.getLop2().setOnAction(eventHandler);
-    }
+    
     public void eventLop3(EventHandler<ActionEvent> eventHandler) {
         Lop.getLop3().setOnAction(eventHandler);
     }
