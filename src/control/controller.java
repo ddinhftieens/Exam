@@ -208,6 +208,14 @@ public class controller {
                 }
             });
         }
+        view.return_background(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                view.getBackground().getChildren().clear();
+                view.return_background();
+                view.setOK(true);
+            }
+        });
         view.start(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -226,6 +234,10 @@ public class controller {
                 TinhDiem.setPrefSize(950, 480);
                 TinhDiem.setStyle("-fx-background-color: #cccccc");
                 view.getBackground().getChildren().add(TinhDiem);
+                for(int t=0;t<TinhDiem.getWrong().size();t++){
+                    view.getList().get(TinhDiem.getWrong().get(t)).setStyle("");
+                }
+                view.setOK(false);
             }
         });
     }

@@ -99,4 +99,9 @@ public class tinhDiem extends GridPane{
             add(answerWrong,i,t);
         }
     }
+
+    public List<Integer> getWrong() {
+        return wrong;
+    }
+    
 }
